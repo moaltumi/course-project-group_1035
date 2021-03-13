@@ -5,57 +5,70 @@
  "nbformat_minor": 5
 }
 
-#In[3]
+#line 22
 
 import pandas as pd
-import seaborn as sns 
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-project_files1 = pd.read_csv('../../data/raw/project files.csv')
-
-
-#In[5]
-
+#line 30
+#changed by aneeq
 def load_and_process(url_or_path_to_csv_file):
     
     df = (pd.read_csv(url_or_path_to_csv_file)
           .drop(columns = ['DIVERTED','CANCELLED', 'CANCELLATION_REASON', 'AIR_SYSTEM_DELAY', 'SECURITY_DELAY','AIRLINE_DELAY', 'LATE_AIRCRAFT_DELAY','WEATHER_DELAY'])
-          .dropna(axis = 0)
+          .dropna(axis = 1)
           .rename(columns = {"WHEELS_OFF" : "GATE_TO_TAKEOFF"}))
     return df
 
-#In[10]
 
-def group_by(df):
-    return df.groupby('DELAYED_OR_NOT', as_index = False).mean()
+def displot(df,df_col,plot_title): # put col name as string in df_col, title as string in plot_title, and bins as integer keep it default
+    sns.distplot(df[df_col], kde=False).set_title(plot_title)
+
+    
+    
+    
+def barplot(df,colx,coly,plot_title):
+    sns.barplot(x = colx, y = coly, data = df).set_title(plot_title)
+    
+    
+def correlmatrix(df): #method to plot correlation matrix, it show relation between all attributes
+    corr = df.corr()# plot the heatmap
+    sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns,linewidths=0.5, vmin=0, vmax=1, annot=False, annot_kws={"size":8},cmap=sns.diverging_palette(200, 20, as_cmap=True))
+        
+        
+        
+def scatterPlot(df,colx,coly): # to plot scatterplot shows relation between any two attributes
+    df.plot(kind='scatter', x=colx, y=coly)    
+    
+    
+
+#your previous code dosen't work
+# def load_and_process(url_or_path_to_csv_file):
+    
+    
+#     df = (pd.read_csv(url_or_path_to_csv_file)
+#           .drop(columns = ['DIVERTED','CANCELLED', 'CANCELLATION_REASON', 'AIR_SYSTEM_DELAY', 'SECURITY_DELAY','AIRLINE_DELAY', 'LATE_AIRCRAFT_DELAY','WEATHER_DELAY','Unamed: 31'])
+#           .dropna(axis = 0)
+#           .rename(columns = {"WHEELS_OFF" : "GATE_TO_TAKEOFF"}))
+#     return df
 
 
 
-def displot(df):
-    sns.displot(df['DAY'], kde=True, bins=31)
     
-#In[11]
-    
-    
-def displot2(df):
-    sns.displot(df['AIRLINE'], kde=False, bins=13)
-    
-#In[12]
+    #don't need these just call the above function with your requirements
+# def displot2(df):
+#     sns.displot(df['AIRLINE'], kde=False, bins=13).set_title('amount of flights per airline')
     
     
-def displot3(df):
-    sns.displot(df['ORIGIN_AIRPORT'], kde=False, bins=322)
+# def displot3(df):
+#     sns.displot(df['ORIGIN_AIRPORT'], kde=False, bins=322).set_title('departing flights')
     
-#In[9]
     
-def barplot(df):
-    sns.barplot(y = count, x = 'DELAYED_OR_NOT', data =df).set_title('number of flights delayed versus on time')
-    
-#[]
-    
-def barplot2(df):
-    sns.barplot(y = 'AIRLINE', x = 'DELAYED_OR_NOT', data =df).set_title('Airlines that experienced most delays')
-   
+# def barplot(df):
+#     sns.barplot(y = 'DELAYED_OR_NOT', data =df).set_title('number of flights delayed versus on time')
 
-def stripplot(df):
-    sns.stripplot(y = 'DISTANCE', x ='DELAYED_OR_NOT', data = df).set_title('Flight distance and delays')
+
+
