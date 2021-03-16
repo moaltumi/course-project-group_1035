@@ -18,7 +18,7 @@ Details for Milestone are available on Canvas (left sidebar, Course Project) or 
 ## Team Members
 
 - **David Lens**: im a fourth year Human Kinetics student, and this is my first computer science class!
-- Person 2: one sentence about you!
+- Person 2: Mohamed Altumi, 4th year economics student.
 
 ## References
 
