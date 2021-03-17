@@ -71,6 +71,4 @@ def scatterPlot(df,colx,coly): # to plot scatterplot shows relation between any 
 #     sns.barplot(y = 'DELAYED_OR_NOT', data =df).set_title('number of flights delayed versus on time')
 
 
-def displot(df,df_col,plot_title, bins):
-    sns.distplot(df[df_col], kde=False, bins=bins).set_title(plot_title)
 
