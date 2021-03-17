@@ -43,8 +43,8 @@ def correlmatrix(df): #method to plot correlation matrix, it show relation betwe
 def scatterPlot(df,colx,coly): # to plot scatterplot shows relation between any two attributes
     df.plot(kind='scatter', x=colx, y=coly)    
     
-def countPlot(df,col):
-    sns.countplot(x=col, data=df)
+def countPlot(df,col,hue):
+    sns.countplot(x=col, data=df, hue=hue)
 
 #your previous code dosen't work
 # def load_and_process(url_or_path_to_csv_file):
